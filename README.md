@@ -87,6 +87,7 @@ To analyze and preprocess the dataset, follow these steps:
     - Generate feature distributions and correlation matrices.
     - Save the cleaned dataset as LLCP2023.csv for model training.
 
+Note: Order of Notebook `EDA-part-1.ipynb` -> `EDA-part-2.ipynb` -> `Random-Forest.ipynb`/`SMOTE-LR.ipynb`/`XG-boost.ipynb`
 
 ## Requirements
 

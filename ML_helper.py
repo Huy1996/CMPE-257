@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from sklearn.metrics import classification_report, confusion_matrix, f1_score, roc_auc_score, roc_curve
+from sklearn.metrics import classification_report, confusion_matrix, f1_score, roc_auc_score, roc_curve, accuracy_score
 from sklearn.model_selection import StratifiedKFold
 
 
@@ -48,7 +48,7 @@ def cross_validation(X, y, model, metrices:dict=None, k:int=5):
     return results
 
 
-def train_and_evaluate(model, X_train, X_test, y_train, y_test):
+def train_and_evaluate(model, X_train, X_test, y_train, y_test, model_name):
     model.fit(X_train, y_train)
     
     # Predict on test set
@@ -59,11 +59,14 @@ def train_and_evaluate(model, X_train, X_test, y_train, y_test):
     auc_score = roc_auc_score(y_test, y_pred_prob)
     f1 = f1_score(y_test, y_pred)
     cm = confusion_matrix(y_test, y_pred)
+    ac = accuracy_score(y_test, y_pred)
     report = classification_report(y_test, y_pred)
 
     # Print results
+    print(model_name)
     print(f"🔹 AUC-ROC Score: {auc_score:.4f}")
     print(f"🔹 F1 Score: {f1:.4f}")
+    print(f"🔹 Accuracy Score: {ac:.4f}")
     print(f"📌 Confusion Matrix:\n{cm}\n")
     print(f"📌 Classification Report:\n{report}\n")
 
@@ -72,7 +75,7 @@ def train_and_evaluate(model, X_train, X_test, y_train, y_test):
     sns.heatmap(cm, annot=True, fmt="d", cmap="Blues")
     plt.xlabel("Predicted")
     plt.ylabel("Actual")
-    plt.title("Confusion Matrix")
+    plt.title(f"Confusion Matrix {model_name}")
 
     # Plot AUC-ROC Curve
     fpr, tpr, _ = roc_curve(y_test, y_pred_prob)
@@ -81,7 +84,7 @@ def train_and_evaluate(model, X_train, X_test, y_train, y_test):
     plt.plot([0, 1], [0, 1], color='gray', linestyle='--')
     plt.xlabel("False Positive Rate")
     plt.ylabel("True Positive Rate")
-    plt.title("AUC-ROC Curve")
+    plt.title(f"AUC-ROC Curve {model_name}")
     plt.legend(loc="lower right")
     plt.grid(True)
     plt.show();
