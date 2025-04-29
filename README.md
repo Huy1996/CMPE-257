@@ -1,4 +1,6 @@
-# Heart Disease Prediction - Data Processing and EDA
+# https://github.com/Huy1996/CMPE-257.git
+
+# Heart Disease Prediction
 
 ## Overview
 This project focuses on predicting heart disease using machine learning techniques. The dataset is initially stored in SAS XPT format and needs preprocessing before model training. The workflow includes:
